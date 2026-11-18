@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-secondary: #4393ab;
+  --color-secondary-hover: #36798e;
+  --color-secondary-active: #2e6274;
+  --color-secondary-subtle: rgba(67, 147, 171, 0.12);
+  --color-dark-canvas: #161616;
+  --color-dark-surface: #1e1e1e;
+  --color-dark-card: #222222;
+  --color-dark-border: #2e2e2e;
+}
+
+@layer base {
+  :root {
+    --color-brand-secondary: #4393ab;
+    --color-canvas-bg: #f8fafc;
+    --color-card-bg: #ffffff;
+    --color-text-main: #000000;
+    font-family: 'Cairo', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* LIGHT MODE (#f8fafc canvas, pure black #000000 primary text) */
+  html:not(.dark) {
+    background-color: #f8fafc;
+    color: #000000;
+  }
+
+  html:not(.dark) body {
+    background-color: #f8fafc;
+    color: #000000;
+  }
+
+  html:not(.dark) h1,
+  html:not(.dark) h2,
+  html:not(.dark) h3,
+  html:not(.dark) h4,
+  html:not(.dark) h5,
+  html:not(.dark) h6 {
+    color: #000000 !important;
+  }
+
+  html:not(.dark) .text-slate-900,
+  html:not(.dark) .text-slate-800,
+  html:not(.dark) .text-slate-700 {
+    color: #000000 !important;
+  }
+
+  html:not(.dark) .text-slate-600,
+  html:not(.dark) .text-slate-500 {
+    color: #1e293b !important;
+  }
+
+  /* DARK MODE (#161616 canvas, pure white #ffffff primary text) */
+  html.dark {
+    background-color: #161616 !important;
+    color: #ffffff !important;
+    color-scheme: dark;
+  }
+
+  html.dark body {
+    background-color: #161616 !important;
+    color: #ffffff !important;
+  }
+
+  html.dark h1,
+  html.dark h2,
+  html.dark h3,
+  html.dark h4,
+  html.dark h5,
+  html.dark h6 {
+    color: #ffffff !important;
+  }
+
+  html.dark .dark\:text-white,
+  html.dark .dark\:text-slate-100,
+  html.dark .dark\:text-slate-200,
+  html.dark .dark\:text-slate-300 {
+    color: #ffffff !important;
+  }
+
+  html.dark .dark\:text-slate-400 {
+    color: #e2e8f0 !important;
+  }
+
+  html.dark .dark\:text-slate-500 {
+    color: #cbd5e1 !important;
+  }
+
+  /* Dark mode surface elevations matching #161616 canvas */
+  html.dark aside {
+    background-color: #181818 !important;
+    border-color: #262626 !important;
+  }
+
+  html.dark header {
+    background-color: #181818 !important;
+    border-color: #262626 !important;
+  }
+
+  html.dark .dark\:bg-slate-950 {
+    background-color: #161616 !important;
+  }
+
+  html.dark .dark\:bg-slate-900,
+  html.dark .dark\:bg-slate-900\/80,
+  html.dark .dark\:bg-slate-900\/95,
+  html.dark .dark\:bg-slate-900\/60,
+  html.dark .dark\:bg-slate-900\/50 {
+    background-color: #1e1e1e !important;
+  }
+
+  html.dark .dark\:bg-slate-800,
+  html.dark .dark\:bg-slate-800\/60,
+  html.dark .dark\:bg-slate-800\/70,
+  html.dark .dark\:bg-slate-800\/80,
+  html.dark .dark\:bg-slate-850 {
+    background-color: #252525 !important;
+  }
+
+  html.dark .dark\:border-slate-800 {
+    border-color: #2a2a2a !important;
+  }
+
+  html.dark .dark\:border-slate-700,
+  html.dark .dark\:border-slate-700\/60 {
+    border-color: #333333 !important;
+  }
+
+  html.dark input,
+  html.dark select,
+  html.dark textarea {
+    background-color: #1a1a1a !important;
+    border-color: #303030 !important;
+    color: #ffffff !important;
+  }
+
+  html.dark input::placeholder,
+  html.dark textarea::placeholder {
+    color: #94a3b8 !important;
+  }
+
+  [dir="ltr"] {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Secondary Color Utility Classes (#4393AB) */
+.bg-secondary {
+  background-color: #4393ab !important;
+}
+.hover\:bg-secondary:hover {
+  background-color: #36798e !important;
+}
+.text-secondary {
+  color: #4393ab !important;
+}
+.border-secondary {
+  border-color: #4393ab !important;
+}
+.bg-secondary-subtle {
+  background-color: rgba(67, 147, 171, 0.12) !important;
+}
+
+/* Custom Scrollbar for ERP tables */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  aside, header, nav, .print\:hidden {
+    display: none !important;
+  }
+}

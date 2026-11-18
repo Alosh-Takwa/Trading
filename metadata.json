@@ -1,0 +1,6 @@
+{
+  "name": "SinoTrack ERP - Sourcing & Import Management",
+  "description": "منصة متكاملة وشاملة لإدارة الموردين والمصانع الصينية، المنتجات والأجهزة المنزلية، عروض الأسعار، أوامر الشراء، الشحنات وتكلفة الاستيراد الفعلية مع التخزين السحابي الدائم بقاعدة بيانات Cloud Firestore.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

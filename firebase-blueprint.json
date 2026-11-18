@@ -1,0 +1,132 @@
+{
+  "entities": {
+    "Supplier": {
+      "title": "Supplier",
+      "description": "Chinese manufacturing partner or trading supplier profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64, "description": "Supplier ID" },
+        "nameEn": { "type": "string", "maxLength": 200, "description": "English company name" },
+        "nameCn": { "type": "string", "maxLength": 200, "description": "Chinese company name" },
+        "factoryName": { "type": "string", "maxLength": 200, "description": "Factory name" },
+        "type": { "type": "string", "maxLength": 50, "description": "Type of supplier (direct_factory, trading_company, oem_odm)" },
+        "country": { "type": "string", "maxLength": 50, "description": "Country" },
+        "city": { "type": "string", "maxLength": 50, "description": "City" },
+        "address": { "type": "string", "maxLength": 255, "description": "Physical address" },
+        "phone": { "type": "string", "maxLength": 50, "description": "Phone number" },
+        "email": { "type": "string", "maxLength": 100, "description": "Email address" },
+        "status": { "type": "string", "maxLength": 50, "description": "Supplier status" },
+        "driveFolderId": { "type": "string", "maxLength": 128, "description": "Google Drive folder ID" },
+        "driveFolderUrl": { "type": "string", "maxLength": 500, "description": "Google Drive folder URL" },
+        "updatedAt": { "type": "string", "maxLength": 64, "description": "ISO timestamp" }
+      },
+      "required": ["id", "nameEn", "type", "city"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Product catalog item specification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64, "description": "Product ID" },
+        "nameAr": { "type": "string", "maxLength": 200, "description": "Arabic product name" },
+        "nameEn": { "type": "string", "maxLength": 200, "description": "English product name" },
+        "modelNumber": { "type": "string", "maxLength": 100, "description": "Factory model number" },
+        "supplierId": { "type": "string", "maxLength": 64, "description": "Associated supplier ID" },
+        "category": { "type": "string", "maxLength": 100, "description": "Product category" },
+        "brand": { "type": "string", "maxLength": 100, "description": "Brand name" },
+        "updatedAt": { "type": "string", "maxLength": 64, "description": "ISO timestamp" }
+      },
+      "required": ["id", "nameEn", "modelNumber"]
+    },
+    "Catalog": {
+      "title": "Catalog",
+      "description": "Supplier catalog document uploaded to Google Drive with link stored in database",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64, "description": "Catalog ID" },
+        "supplierId": { "type": "string", "maxLength": 64, "description": "Associated supplier ID" },
+        "name": { "type": "string", "maxLength": 255, "description": "Catalog file title" },
+        "driveFileId": { "type": "string", "maxLength": 128, "description": "Google Drive file ID" },
+        "driveViewLink": { "type": "string", "maxLength": 1000, "description": "Direct Google Drive preview/view URL" },
+        "driveDownloadLink": { "type": "string", "maxLength": 1000, "description": "Direct download link" },
+        "fileSize": { "type": "string", "maxLength": 50, "description": "File size" },
+        "uploadedAt": { "type": "string", "maxLength": 64, "description": "ISO timestamp" }
+      },
+      "required": ["id", "supplierId", "name", "driveViewLink"]
+    },
+    "PurchaseOrder": {
+      "title": "PurchaseOrder",
+      "description": "Purchase order contract placed with a supplier",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64, "description": "Order ID" },
+        "orderNumber": { "type": "string", "maxLength": 100, "description": "Order reference code" },
+        "poNumber": { "type": "string", "maxLength": 100, "description": "PO number" },
+        "supplierId": { "type": "string", "maxLength": 64, "description": "Supplier ID" },
+        "status": { "type": "string", "maxLength": 50, "description": "Order status" },
+        "totalAmount": { "type": "number", "description": "Total order amount" },
+        "currency": { "type": "string", "maxLength": 10, "description": "Order currency" },
+        "orderDate": { "type": "string", "maxLength": 64, "description": "Order placement date" },
+        "updatedAt": { "type": "string", "maxLength": 64, "description": "ISO timestamp" }
+      },
+      "required": ["id", "orderNumber", "supplierId", "status"]
+    },
+    "Invoice": {
+      "title": "Invoice",
+      "description": "Supplier commercial invoice and payment tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64, "description": "Invoice ID" },
+        "invoiceNumber": { "type": "string", "maxLength": 100, "description": "Invoice number" },
+        "poNumber": { "type": "string", "maxLength": 100, "description": "PO number" },
+        "supplierId": { "type": "string", "maxLength": 64, "description": "Supplier ID" },
+        "status": { "type": "string", "maxLength": 50, "description": "Payment status" },
+        "totalAmount": { "type": "number", "description": "Invoice total" },
+        "paidAmount": { "type": "number", "description": "Amount paid so far" },
+        "currency": { "type": "string", "maxLength": 10, "description": "Currency" },
+        "dueDate": { "type": "string", "maxLength": 64, "description": "Due date" },
+        "updatedAt": { "type": "string", "maxLength": 64, "description": "ISO timestamp" }
+      },
+      "required": ["id", "invoiceNumber", "supplierId", "totalAmount"]
+    },
+    "DatabaseBackup": {
+      "title": "DatabaseBackup",
+      "description": "Full master snapshot of the ERP database synced to Firestore",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64, "description": "Backup Document ID" },
+        "syncedAt": { "type": "string", "maxLength": 64, "description": "Timestamp" },
+        "suppliersCount": { "type": "number", "description": "Total suppliers" },
+        "productsCount": { "type": "number", "description": "Total products" },
+        "ordersCount": { "type": "number", "description": "Total orders" }
+      },
+      "required": ["id", "syncedAt"]
+    }
+  },
+  "firestore": {
+    "/suppliers/{supplierId}": {
+      "schema": "Supplier",
+      "description": "Collection of all suppliers and manufacturers"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Collection of products and technical specifications"
+    },
+    "/catalogs/{catalogId}": {
+      "schema": "Catalog",
+      "description": "Collection of product catalogs stored on Drive with links in Firestore"
+    },
+    "/orders/{orderId}": {
+      "schema": "PurchaseOrder",
+      "description": "Collection of procurement purchase orders"
+    },
+    "/invoices/{invoiceId}": {
+      "schema": "Invoice",
+      "description": "Collection of commercial invoices and payments"
+    },
+    "/system/master_state": {
+      "schema": "DatabaseBackup",
+      "description": "Single master state document for full database synchronicity"
+    }
+  }
+}
